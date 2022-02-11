@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
-import DUMMY_MEALS from "./dummy-meals";
+// import DUMMY_MEALS from "./dummy-meals";
 
 import classes from "./AvailableMeals.module.css";
 import { Card } from "../UI/Card";
