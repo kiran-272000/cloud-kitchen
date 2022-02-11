@@ -35,7 +35,7 @@ const HeaderCartButton = (props) => {
   return (
     <button className={btnClasses} onClick={props.showCart}>
       <span className={classes.icon}>
-        <BsFillCartFill />
+        <BsFillCartFill size={30} />
       </span>
       <span className={classes.phone}>Your Cart</span>
       <span className={classes.badge}>{numberCartItem}</span>

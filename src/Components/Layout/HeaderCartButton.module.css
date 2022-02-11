@@ -62,7 +62,14 @@
   .phone {
     display: none;
   }
+  .badge {
+    display: none;
+  }
+  .icon {
+    width: 0rem;
+    margin-right: 0rem;
+  }
   .button {
-    border-radius: 12rem;
+    padding: 0rem;
   }
 }
