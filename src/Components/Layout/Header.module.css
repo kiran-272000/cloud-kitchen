@@ -33,4 +33,7 @@
     font-size: 20pt;
     padding: 0 1%;
   }
+  .header {
+    padding: 0 5%;
+  }
 }

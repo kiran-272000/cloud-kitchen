@@ -67,9 +67,12 @@
   }
   .icon {
     width: 0rem;
-    margin-right: 0rem;
+    margin-right: 1rem;
+    margin-top: -10px;
   }
   .button {
-    padding: 0rem;
+    padding: 0%;
+    border-radius: 0%;
+    background-color: #8a2b06;
   }
 }
