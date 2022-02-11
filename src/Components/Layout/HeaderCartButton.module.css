@@ -62,4 +62,7 @@
   .phone {
     display: none;
   }
+  .button {
+    border-radius: 12rem;
+  }
 }
