@@ -7,7 +7,10 @@ import classes from "./Cart.module.css";
 import Checkout from "./Checkout";
 const Cart = (props) => {
   const [isCheckOut, setisCheckOut] = useState(false);
-  const [orderItem, setorderItem] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
+  const [error, setError] = useState(null);
+
   const cartCtx = useContext(CartContext);
   // console.log(cartCtx);
   const hasItem = cartCtx.item.length > 0;
@@ -21,28 +24,41 @@ const Cart = (props) => {
   };
   const checkOutHandler = () => {
     setisCheckOut(true);
+  };
+
+  const submitOrderHandler = async (userData) => {
+    setIsSubmitting(true);
     const orderDetails = cartCtx.item.map((orderDetail) => {
       return {
-        id: orderDetail.id,
+        name: orderDetail.name,
+        price: orderDetail.price,
         amount: orderDetail.amount,
       };
     });
-    setorderItem(orderDetails);
-  };
-
-  const submitOrderHandler = (userData) => {
-    console.log(userData);
-    console.log(orderItem);
-    fetch("https://cloud-kitchen-gk.herokuapp.com/api/kitchen/cart", {
-      method: "POST",
-      body: JSON.stringify({
-        user: userData,
-        orderItems: orderItem,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    console.log(orderDetails);
+    try {
+      const response = await fetch(
+        "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/cart",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: userData,
+            orderItems: orderDetails,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Something Went Wrong...");
+      }
+      setDidSubmit(true);
+      cartCtx.clearCart();
+    } catch (err) {
+      setError(err.message);
+    }
+    setIsSubmitting(false);
   };
 
   const modelAction = (
@@ -73,8 +89,8 @@ const Cart = (props) => {
     </ul>
   );
 
-  return (
-    <Model onClose={props.onClose}>
+  const cartModelContemt = (
+    <React.Fragment>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -84,6 +100,30 @@ const Cart = (props) => {
         <Checkout onCancel={props.onClose} onUserSubmit={submitOrderHandler} />
       )}
       {!isCheckOut && modelAction}
+    </React.Fragment>
+  );
+
+  const isSubmittingModel = <h3>Ordering...</h3>;
+
+  const didSubmitModel = (
+    <React.Fragment>
+      <h3>Your Order taken, will be delivered Soon</h3>
+      <div className={classes.actions}>
+        <button className={classes.button} onClick={props.onClose}>
+          Close
+        </button>
+      </div>
+    </React.Fragment>
+  );
+
+  const errorModel = <h3>{error}</h3>;
+
+  return (
+    <Model onClose={props.onClose}>
+      {!isSubmitting && !didSubmit && cartModelContemt}
+      {isSubmitting && isSubmittingModel}
+      {didSubmit && !isSubmitting && didSubmitModel}
+      {!isSubmitting && !didSubmit && error && errorModel}
     </Model>
   );
 };

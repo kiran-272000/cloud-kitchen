@@ -6,6 +6,7 @@ import CartProvider from "./Store/CartProvider";
 
 function App() {
   const [openCart, setopenCart] = useState(false);
+  // const [openSideMenu, setOpenSideMenu] = useState(false);
 
   const showCartHandler = () => {
     setopenCart(true);
@@ -13,6 +14,13 @@ function App() {
   const hideCartHandler = () => {
     setopenCart(false);
   };
+
+  // const showSideMenuHandler = () => {
+  //   setOpenSideMenu(true);
+  // };
+  // const hideSideMenuHandler = () => {
+  //   setOpenSideMenu(false);
+  // };
   return (
     <CartProvider>
       {openCart && <Cart onClose={hideCartHandler} />}
