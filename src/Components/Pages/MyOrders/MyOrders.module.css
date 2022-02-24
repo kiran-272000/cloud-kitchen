@@ -54,3 +54,18 @@
   font-weight: bold;
   color: #5a1a01;
 }
+
+@media only screen and (max-width: 500px) {
+  .order-image {
+    height: 200px;
+    padding-bottom: 20px;
+  }
+  .orderEmpty-msg {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 12pt;
+  }
+  .actions {
+    font-size: 10pt;
+  }
+}

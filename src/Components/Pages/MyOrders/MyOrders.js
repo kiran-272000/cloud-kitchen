@@ -25,7 +25,6 @@ const MyOrders = () => {
           }
         );
         const data = await response.json();
-        // setHasItem(data.order.length > 0);
         let arr = [];
         data.order.map((item) => {
           return item.orderItems.map((orderedMeal) => {

@@ -97,11 +97,11 @@ const MyCart = (props) => {
       {hasItem && cartItems}
       {!hasItem && (
         <>
-          <div className={classes["cart-image"]}>
-            <img src={empty_cart} alt="Your Cart is Empty" />
-          </div>
           <div className={classes["cartEmpty-msg"]}>
             <span>Your Cart Is Empty Continue Shopping...</span>
+          </div>
+          <div className={classes["cart-image"]}>
+            <img src={empty_cart} alt="Your Cart is Empty" />
           </div>
         </>
       )}

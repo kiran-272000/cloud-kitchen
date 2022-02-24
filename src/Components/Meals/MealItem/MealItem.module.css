@@ -12,6 +12,7 @@
 
 .description {
   font-style: italic;
+  margin-left: 15px;
 }
 
 .price {
@@ -19,10 +20,12 @@
   font-weight: bold;
   color: #ad5502;
   font-size: 1.25rem;
+  margin-left: 15px;
 }
 
 .wish {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
+  cursor: pointer;
 }

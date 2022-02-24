@@ -61,6 +61,7 @@
 
 .message {
   height: auto;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,4 +72,25 @@
   font-size: larger;
   font-weight: bold;
   color: #5a1a01;
+}
+
+@media only screen and (max-width: 500px) {
+  .cart-image {
+    height: 200px;
+  }
+  .cartEmpty-msg {
+    font-size: 10.5pt;
+    padding: 20px 0;
+  }
+  .actions {
+    font-size: 10pt;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .actions .button {
+    padding: 0.5rem 1.5rem;
+  }
+  .actions .button--alt {
+    padding: 0.5rem 1rem;
+  }
 }
