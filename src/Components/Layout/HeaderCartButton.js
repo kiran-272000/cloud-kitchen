@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BsFillCartFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import CartContext from "../../Store/CartContext";
 
 import classes from "./HeaderCartButton.module.css";
@@ -33,13 +34,16 @@ const HeaderCartButton = (props) => {
   }, [item]);
 
   return (
-    <button className={btnClasses} onClick={props.showCart}>
-      <span className={classes.icon}>
-        <BsFillCartFill size={25} />
-      </span>
-      <span className={classes.phone}>Your Cart</span>
-      <span className={classes.badge}>{numberCartItem}</span>
-    </button>
+    <Link to="/mycart" className={classes.link}>
+      <button className={btnClasses}>
+        <span className={classes.icon}>
+          <BsFillCartFill size={25} />
+        </span>
+        {numberCartItem !== 0 && (
+          <span className={classes.badge}>{numberCartItem}</span>
+        )}
+      </button>
+    </Link>
   );
 };
 

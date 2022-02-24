@@ -14,8 +14,13 @@
   z-index: 10;
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+}
+
 .sideMenuButton {
-  display: flex;
+  cursor: pointer;
 }
 
 .main-image {

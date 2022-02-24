@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import CartContext from "../../Store/CartContext";
-import classes from "./AvailableMeals.module.css";
-import { Card } from "../UI/Card";
-import MealItem from "./MealItem/MealItem";
+import CartContext from "../../../Store/CartContext";
+import classes from "../../Meals/AvailableMeals.module.css";
+import { Card } from "../../UI/Card";
+import MealItem from "../../Meals/MealItem/MealItem";
 
-const AvailableMeals = () => {
+const WishList = () => {
   const cartCtx = useContext(CartContext);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [wishListArray, setwishListArray] = useState([]);
@@ -33,27 +33,33 @@ const AvailableMeals = () => {
   }, []);
 
   console.log(wishListArray);
+
   const mealsList = cartCtx.availableMeals.map((item) => {
     // console.log(["m1"].includes(item.id));
     const fav = wishListArray.includes(item.id);
-    return (
-      isDataFetched && (
-        <MealItem
-          id={item.id}
-          key={item.id}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-          isFav={fav}
-          isHeartVisible={true}
-        />
-      )
-    );
+    if (fav) {
+      return (
+        isDataFetched && (
+          <MealItem
+            id={item.id}
+            key={item.id}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+            isFav={fav}
+            isHeartVisible={false}
+          />
+        )
+      );
+    }
   });
   return (
-    <section className={classes.meals}>
+    <section className={classes.mealswishList}>
       <Card>
-        {!cartCtx.loading && !cartCtx.error && <ul>{mealsList}</ul>}
+        {!cartCtx.loading && !cartCtx.error && wishListArray.length > 0 && (
+          <ul>{mealsList}</ul>
+        )}
+        {wishListArray.length === 0 && <h2>WishList is Empty</h2>}
         {!cartCtx.loading && cartCtx.error && (
           <h3 className={classes.message}>{cartCtx.error}</h3>
         )}
@@ -63,4 +69,4 @@ const AvailableMeals = () => {
   );
 };
 
-export default AvailableMeals;
+export default WishList;

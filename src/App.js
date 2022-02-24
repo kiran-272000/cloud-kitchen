@@ -1,33 +1,59 @@
 import React, { useState } from "react";
-import Cart from "./Components/Cart/Cart";
+import { Route } from "react-router-dom";
+
+import MyCart from "./Components/Pages/Cart/Cart";
 import Header from "./Components/Layout/Header";
 import Meals from "./Components/Meals/Meals";
+import MyOrders from "./Components/Pages/MyOrders/MyOrders";
+import Sidebar from "./Components/SideBar/SideBar";
 import CartProvider from "./Store/CartProvider";
+import Login from "./Components/User/Login";
+import WishList from "./Components/Pages/MyWishList/WishList";
 
 function App() {
-  const [openCart, setopenCart] = useState(false);
-  // const [openSideMenu, setOpenSideMenu] = useState(false);
+  // const [openCart, setopenCart] = useState(false);
+  const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [showLogin, setshowLogin] = useState(false);
 
-  const showCartHandler = () => {
-    setopenCart(true);
-  };
-  const hideCartHandler = () => {
-    setopenCart(false);
+  const sideMenuHandler = () => {
+    setOpenSideMenu(!openSideMenu);
   };
 
-  // const showSideMenuHandler = () => {
-  //   setOpenSideMenu(true);
-  // };
-  // const hideSideMenuHandler = () => {
-  //   setOpenSideMenu(false);
-  // };
+  const showModelHandler = () => {
+    setshowLogin(window.sessionStorage.getItem("isLogin"));
+  };
+
+  const logoutHandler = () => {
+    setshowLogin(false);
+    window.sessionStorage.clear();
+    window.alert("Logged out Successfully!!!!");
+  };
+
   return (
     <CartProvider>
-      {openCart && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <main>
-        <Meals />
-      </main>
+      {openSideMenu && showLogin && (
+        <Sidebar onClose={sideMenuHandler} onLogout={logoutHandler} />
+      )}
+      <Header onShowSideBar={sideMenuHandler} />
+      {console.log("@@@@@@@@@@@" + showLogin)}
+      {!showLogin ? (
+        <Login onLogin={showModelHandler} />
+      ) : (
+        <main>
+          <Route exact path="/">
+            <Meals />
+          </Route>
+          <Route path="/myorders">
+            <MyOrders />
+          </Route>
+          <Route path="/mycart">
+            <MyCart />
+          </Route>
+          <Route path="/mywishlist">
+            <WishList />
+          </Route>
+        </main>
+      )}
     </CartProvider>
   );
 }

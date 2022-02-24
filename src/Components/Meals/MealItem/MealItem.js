@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CartContext from "../../../Store/CartContext";
+
+import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 import classes from "./MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 const MealItem = (props) => {
+  const [isfav, setIsfav] = useState(props.isFav);
   const cartCtx = useContext(CartContext);
   const price = `₹${props.price.toFixed(2)}`;
   const addToCartHandler = (amount) => {
@@ -14,10 +17,42 @@ const MealItem = (props) => {
       price: props.price,
     });
   };
+
+  console.log(isfav);
+
+  const favHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/user/wishlist", {
+        method: "POST",
+        body: JSON.stringify({
+          token: window.sessionStorage.getItem("accessToken"),
+          mealId: props.id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Something Went Wrong...");
+      }
+      setIsfav(!isfav);
+    } catch (err) {}
+  };
+
+  const favButton = isfav ? (
+    <MdFavorite fill="red" size={"20px"} />
+  ) : (
+    <MdOutlineFavoriteBorder size={"20px"} />
+  );
   return (
     <li>
       <div className={classes.meals}>
-        <h3>{props.name}</h3>
+        <div className={classes.wish}>
+          <h3>{props.name}</h3>
+          {props.isHeartVisible && (
+            <label onClick={favHandler}>{favButton}</label>
+          )}
+        </div>
         <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>{price}</div>
       </div>

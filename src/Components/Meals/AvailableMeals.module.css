@@ -11,6 +11,13 @@
   padding: 0;
 }
 
+.message {
+  min-height: 26rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes meals-appear {
   from {
     opacity: 0;
@@ -21,4 +28,19 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.mealswishList {
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  animation: meals-appear 1s ease-out forwards;
+  margin-top: -10rem;
+  position: relative;
+}
+
+.mealswishList ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 const initialCartValue = {
@@ -27,6 +27,7 @@ const cartReducer = (state, action) => {
     } else {
       updatedItems = state.items.concat(action.item);
     }
+    // console.log(updatedItems);
     return {
       items: updatedItems,
       totalAmount: updatedAmount,
@@ -58,6 +59,38 @@ const cartReducer = (state, action) => {
 };
 
 const CartProvider = (props) => {
+  const [meals, setmeals] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [error, seterror] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      setisLoading(true);
+      try {
+        const response = await fetch(
+          "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/meals"
+        );
+        if (!response.ok) {
+          throw new Error("Something went Wrong...");
+        }
+        const data = await response.json();
+        const meal = data.data.meals.map((meal) => {
+          return {
+            id: meal.id,
+            name: meal.name,
+            description: meal.description,
+            price: meal.price,
+          };
+        });
+        setmeals(meal);
+      } catch (err) {
+        seterror(err.message);
+      }
+      setisLoading(false);
+    }
+    fetchData();
+  }, []);
+
   const [cartState, dispatchCartStateAction] = useReducer(
     cartReducer,
     initialCartValue
@@ -72,15 +105,18 @@ const CartProvider = (props) => {
   const clearCartHandler = () => {
     dispatchCartStateAction({ type: "CLEAR" });
   };
-  // console.log(cartState);
+
   const contextValue = {
     item: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
     clearCart: clearCartHandler,
+    availableMeals: meals,
+    loading: isLoading,
+    error: error,
   };
-  // console.log(contextValue);
+
   return (
     <CartContext.Provider value={contextValue}>
       {props.children}
