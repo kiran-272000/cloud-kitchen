@@ -37,7 +37,7 @@ const MyCart = (props) => {
         amount: orderDetail.amount,
       };
     });
-    // console.log(orderDetails);
+
     try {
       const response = await fetch(
         "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/cart",

@@ -18,8 +18,6 @@ const MealItem = (props) => {
     });
   };
 
-  console.log(isfav);
-
   const favHandler = async () => {
     try {
       const response = await fetch(

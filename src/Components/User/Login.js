@@ -102,7 +102,6 @@ const Login = ({ onLogin }) => {
 
     const RegisterFormIsValid =
       nameValid && newEmailValid && newPasswordValid && confirmPasswordValid;
-    // console.log(RegisterFormIsValid);
 
     if (!RegisterFormIsValid) return;
 
@@ -135,9 +134,7 @@ const Login = ({ onLogin }) => {
         window.sessionStorage.setItem("userName", data.userName);
         onLogin();
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const LoginModel = (

@@ -24,7 +24,7 @@ const AvailableMeals = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
+
         setwishListArray(data.wishListArray);
         setIsDataFetched(true);
       } catch (err) {}
@@ -32,9 +32,7 @@ const AvailableMeals = () => {
     fetchData();
   }, []);
 
-  console.log(wishListArray);
   const mealsList = cartCtx.availableMeals.map((item) => {
-    // console.log(["m1"].includes(item.id));
     const fav = wishListArray.includes(item.id);
     return (
       isDataFetched && (

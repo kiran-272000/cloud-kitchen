@@ -24,15 +24,12 @@ const WishList = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
         setwishListArray(data.wishListArray);
         setIsDataFetched(true);
       } catch (err) {}
     }
     fetchData();
   }, []);
-
-  console.log(wishListArray);
 
   const mealsList = cartCtx.availableMeals.map((item) => {
     const fav = wishListArray.includes(item.id);

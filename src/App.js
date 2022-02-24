@@ -35,7 +35,6 @@ function App() {
         <Sidebar onClose={sideMenuHandler} onLogout={logoutHandler} />
       )}
       <Header onShowSideBar={sideMenuHandler} />
-      {console.log("@@@@@@@@@@@" + showLogin)}
       {!showLogin ? (
         <Login onLogin={showModelHandler} />
       ) : (

@@ -12,7 +12,6 @@ const Cart = (props) => {
   const [error, setError] = useState(null);
 
   const cartCtx = useContext(CartContext);
-  // console.log(cartCtx);
   const hasItem = cartCtx.item.length > 0;
 
   const removeItemCart = (id) => {
@@ -35,7 +34,6 @@ const Cart = (props) => {
         amount: orderDetail.amount,
       };
     });
-    console.log(orderDetails);
     try {
       const response = await fetch(
         "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/cart",
