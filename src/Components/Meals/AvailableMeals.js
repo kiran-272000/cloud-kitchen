@@ -12,7 +12,7 @@ const AvailableMeals = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/user/getwishlist",
+          "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
           {
             method: "POST",
             body: JSON.stringify({

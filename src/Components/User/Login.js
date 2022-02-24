@@ -56,13 +56,16 @@ const Login = ({ onLogin }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/user/login", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://cloud-kitchen-gk.herokuapp.com/api/user/login",
+        {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 401) {
         setIsLoginFailed(true);
@@ -111,13 +114,16 @@ const Login = ({ onLogin }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/user/signup", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://cloud-kitchen-gk.herokuapp.com/api/user/signup",
+        {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.status === 403) {
         setIsUserAlreadyExists(true);
       }

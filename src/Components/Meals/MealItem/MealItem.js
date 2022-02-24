@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "../../../Store/CartContext";
 
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
@@ -22,16 +22,19 @@ const MealItem = (props) => {
 
   const favHandler = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/wishlist", {
-        method: "POST",
-        body: JSON.stringify({
-          token: window.sessionStorage.getItem("accessToken"),
-          mealId: props.id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://cloud-kitchen-gk.herokuapp.com/api/user/wishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            token: window.sessionStorage.getItem("accessToken"),
+            mealId: props.id,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Something Went Wrong...");
       }

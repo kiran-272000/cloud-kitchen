@@ -12,7 +12,7 @@ const WishList = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/user/getwishlist",
+          "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
           {
             method: "POST",
             body: JSON.stringify({
@@ -35,7 +35,6 @@ const WishList = () => {
   console.log(wishListArray);
 
   const mealsList = cartCtx.availableMeals.map((item) => {
-    // console.log(["m1"].includes(item.id));
     const fav = wishListArray.includes(item.id);
     if (fav) {
       return (
