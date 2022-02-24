@@ -76,7 +76,7 @@
 
 @media only screen and (max-width: 500px) {
   .cart-image {
-    height: 200px;
+    height: 180px;
   }
   .cartEmpty-msg {
     font-size: 10.5pt;
