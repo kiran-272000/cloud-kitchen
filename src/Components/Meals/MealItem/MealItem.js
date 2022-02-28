@@ -41,9 +41,9 @@ const MealItem = (props) => {
   };
 
   const favButton = isfav ? (
-    <MdFavorite fill="red" size={"20px"} />
+    <MdFavorite fill="red" size={"30px"} />
   ) : (
-    <MdOutlineFavoriteBorder size={"20px"} />
+    <MdOutlineFavoriteBorder size={"30px"} />
   );
   return (
     <li>
