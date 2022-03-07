@@ -14,11 +14,10 @@ const AvailableMeals = () => {
         const response = await fetch(
           "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
           {
-            method: "POST",
-            body: JSON.stringify({
-              token: window.sessionStorage.getItem("accessToken"),
-            }),
             headers: {
+              authorization: `token ${window.sessionStorage.getItem(
+                "accessToken"
+              )}`,
               "content-type": "application/json",
             },
           }
