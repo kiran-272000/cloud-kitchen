@@ -39,19 +39,22 @@ const MyCart = (props) => {
     });
 
     try {
-      const response = await fetch("http://localhost:5000/api/kitchen/cart", {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderItems: orderDetails,
-        }),
-        headers: {
-          Authorization: `token ${window.sessionStorage.getItem(
-            "accessToken"
-          )}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/cart",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: userData,
+            orderItems: orderDetails,
+          }),
+          headers: {
+            Authorization: `token ${window.sessionStorage.getItem(
+              "accessToken"
+            )}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Something Went Wrong...");
       }

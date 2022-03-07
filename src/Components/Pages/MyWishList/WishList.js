@@ -15,7 +15,7 @@ const WishList = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/user/getwishlist",
+          "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
           {
             headers: {
               Authorization: `token ${window.sessionStorage.getItem(

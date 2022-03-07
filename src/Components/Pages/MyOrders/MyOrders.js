@@ -13,7 +13,7 @@ const MyOrders = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/kitchen/usercart",
+          "https://cloud-kitchen-gk.herokuapp.com/api/kitchen/usercart",
           {
             headers: {
               Authorization: `token ${window.sessionStorage.getItem(
