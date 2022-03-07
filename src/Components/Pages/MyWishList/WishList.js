@@ -15,13 +15,12 @@ const WishList = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
+          "http://localhost:5000/api/user/getwishlist",
           {
-            method: "POST",
-            body: JSON.stringify({
-              token: window.sessionStorage.getItem("accessToken"),
-            }),
             headers: {
+              Authorization: `token ${window.sessionStorage.getItem(
+                "accessToken"
+              )}`,
               "content-type": "application/json",
             },
           }
@@ -58,6 +57,7 @@ const WishList = () => {
         )
       );
     }
+    return null;
   });
 
   const emptyWishlist = (
