@@ -59,6 +59,7 @@
 
 .invalid p {
   color: #ca3e51;
+  margin: -1px;
 }
 
 .invalid input {
