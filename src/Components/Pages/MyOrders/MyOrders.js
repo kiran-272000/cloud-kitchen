@@ -25,7 +25,7 @@ const MyOrders = () => {
         );
         const data = await response.json();
         let arr = [];
-        data.order.map((item) => {
+        data.order.reverse().map((item) => {
           return item.orderItems.map((orderedMeal) => {
             return arr.push(orderedMeal);
           });

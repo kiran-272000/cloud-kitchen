@@ -4,7 +4,7 @@ const useInput = (validateValue) => {
   const [enteredValue, setEnteredValue] = useState("");
 
   const valueIsValid = validateValue(enteredValue);
-  console.log(valueIsValid);
+  // console.log(valueIsValid);
 
   const valueChangeHandler = (event) => {
     setEnteredValue(event.target.value);
