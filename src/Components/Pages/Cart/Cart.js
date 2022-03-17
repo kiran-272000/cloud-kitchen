@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartContext from "../../../Store/CartContext";
 import CartItem from "./CartItem";
 import { Card } from "../../UI/Card";
-import Checkout from "./Checkout";
+import Checkout from "./Check-out";
 import empty_cart from "../../../Assets/empty_cart.jpeg";
 import classes from "./Cart.module.css";
 

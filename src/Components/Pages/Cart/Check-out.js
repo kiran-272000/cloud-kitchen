@@ -1,9 +1,7 @@
-import { useRef, useState } from "react";
+import React, { useState } from "react";
+import useInput from "../../../hooks/use-input";
 import classes from "./Checkout.module.css";
 import Model from "../../UI/Model";
-
-const isEmpty = (value) => value.trim() === "";
-const isPinCode = (value) => value.trim().length === 6;
 
 const Checkout = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
@@ -13,23 +11,29 @@ const Checkout = (props) => {
     postalCode: true,
   });
 
-  const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postalInputRef = useRef();
-  const cityInputRef = useRef();
+  const {
+    value: enteredName,
+    isValid: enteredNameIsValid,
+    valueChangeHandler: nameChangeHandler,
+  } = useInput((value) => value.trim() !== "");
+  const {
+    value: enteredStreet,
+    isValid: enteredStreetIsValid,
+    valueChangeHandler: streetChangeHandler,
+  } = useInput((value) => value.trim() !== "");
+  const {
+    value: enteredPostalCode,
+    isValid: enteredPostalCodeIsValid,
+    valueChangeHandler: postalCodeChangeHandler,
+  } = useInput((value) => value.trim().length === 6);
+  const {
+    value: enteredCity,
+    isValid: enteredCityIsValid,
+    valueChangeHandler: cityChangeHandler,
+  } = useInput((value) => value.trim() !== "");
 
   const confirmHandler = (event) => {
     event.preventDefault();
-    const enteredName = nameInputRef.current.value;
-    const enteredStreet = streetInputRef.current.value;
-    const enteredPostalCode = postalInputRef.current.value;
-    const enteredCity = cityInputRef.current.value;
-
-    const enteredNameIsValid = !isEmpty(enteredName);
-    const enteredStreetIsValid = !isEmpty(enteredStreet);
-    const enteredPostalCodeIsValid = isPinCode(enteredPostalCode);
-    const enteredCityIsValid = !isEmpty(enteredCity);
-
     setFormInputValidity({
       name: enteredNameIsValid,
       street: enteredStreetIsValid,
@@ -46,6 +50,7 @@ const Checkout = (props) => {
     if (!formIsVaild) {
       return;
     }
+
     props.onUserSubmit({
       name: enteredName,
       street: enteredStreet,
@@ -54,7 +59,6 @@ const Checkout = (props) => {
     });
     props.onCancel(false);
   };
-
   return (
     <Model>
       <form className={classes.form} onSubmit={confirmHandler}>
@@ -64,7 +68,12 @@ const Checkout = (props) => {
           }`}
         >
           <label htmlFor="name">Your Name</label>
-          <input type="text" id="name" ref={nameInputRef} />
+          <input
+            type="text"
+            id="name"
+            onChange={nameChangeHandler}
+            value={enteredName}
+          />
           {!formInputValidity.name && <p>Please Enter A Valid Name!</p>}
         </div>
         <div
@@ -73,7 +82,12 @@ const Checkout = (props) => {
           }`}
         >
           <label htmlFor="street">Street</label>
-          <input type="text" id="street" ref={streetInputRef} />
+          <input
+            type="text"
+            id="street"
+            onChange={streetChangeHandler}
+            value={enteredStreet}
+          />
           {!formInputValidity.street && (
             <p>Please Enter A Valid Street Name!</p>
           )}
@@ -84,7 +98,12 @@ const Checkout = (props) => {
           }`}
         >
           <label htmlFor="postal">Postal Code</label>
-          <input type="text" id="postal" ref={postalInputRef} />
+          <input
+            type="text"
+            id="postal"
+            onChange={postalCodeChangeHandler}
+            value={enteredPostalCode}
+          />
           {!formInputValidity.postalCode && <p>Please Enter A Postal Code!</p>}
         </div>
         <div
@@ -93,7 +112,12 @@ const Checkout = (props) => {
           }`}
         >
           <label htmlFor="city">City</label>
-          <input type="text" id="city" ref={cityInputRef} />
+          <input
+            type="text"
+            id="city"
+            onChange={cityChangeHandler}
+            value={enteredCity}
+          />
           {!formInputValidity.city && <p>Please Enter A City Name!</p>}
         </div>
         <div className={classes.actions}>
