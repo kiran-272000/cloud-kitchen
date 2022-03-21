@@ -14,7 +14,13 @@ const cartReducer = (state, action) => {
       (item) => item.id === action.item.id
     );
 
+    // const existingItemNew = state.items.find(
+    //   (item) => item.id === action.item.id
+    // );
+
+    // console.log(`new ${existingItemNew.amount}`);
     const existingItem = state.items[exsistingCartItemIndex];
+    // console.log(`old ${existingItem.amount}`);
     let updatedItems;
 
     if (existingItem) {
