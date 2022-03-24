@@ -8,8 +8,11 @@ const AvailableMeals = () => {
   const cartCtx = useContext(CartContext);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [wishListArray, setwishListArray] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [error, seterror] = useState(null);
   useEffect(() => {
     async function fetchData() {
+      setisLoading(true);
       try {
         const response = await fetch(
           "https://cloud-kitchen-gk.herokuapp.com/api/user/getwishlist",
@@ -26,7 +29,10 @@ const AvailableMeals = () => {
 
         setwishListArray(data.wishListArray);
         setIsDataFetched(true);
-      } catch (err) {}
+      } catch (err) {
+        seterror(err.message);
+      }
+      setisLoading(false);
     }
     fetchData();
   }, []);
@@ -50,11 +56,9 @@ const AvailableMeals = () => {
   return (
     <section className={classes.meals}>
       <Card>
-        {!cartCtx.loading && !cartCtx.error && <ul>{mealsList}</ul>}
-        {!cartCtx.loading && cartCtx.error && (
-          <h3 className={classes.message}>{cartCtx.error}</h3>
-        )}
-        {cartCtx.loading && <h3 className={classes.message}>Loading...</h3>}
+        {!isLoading && !error && <ul>{mealsList}</ul>}
+        {!isLoading && error && <h3 className={classes.message}>{error}</h3>}
+        {isLoading && <h3 className={classes.message}>Loading...</h3>}
       </Card>
     </section>
   );
