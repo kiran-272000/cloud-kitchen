@@ -1,19 +1,26 @@
 import React from "react";
 import { SideBarData } from "./SideBarContent";
 import { HiMenu } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RiAccountCircleFill } from "react-icons/ri";
 
 import classes from "./SideBar.module.css";
+import { useHistory } from "react-router-dom";
 
 const Sidebar = (props) => {
+  const history = useHistory();
   const sideMenu = SideBarData.map((item, key) => {
     return (
       <li key={key} onClick={props.onClose}>
-        <Link to={item.link} className={classes.sidebarItem}>
+        <NavLink
+          activeClassName={classes.active}
+          to={item.link}
+          exact={true}
+          className={classes.sidebarItem}
+        >
           <div className={classes.icon}>{item.icon}</div>
           <div className={classes.title}>{item.title}</div>
-        </Link>
+        </NavLink>
       </li>
     );
   });
@@ -25,6 +32,7 @@ const Sidebar = (props) => {
   const logoutHandler = () => {
     props.onLogout();
     props.onClose();
+    history.push("/");
   };
 
   return (

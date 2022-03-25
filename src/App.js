@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import MyCart from "./Components/Pages/Cart/Cart";
 import Header from "./Components/Layout/Header";
@@ -39,18 +39,20 @@ function App() {
         <Login onLogin={showModelHandler} />
       ) : (
         <main>
-          <Route exact path="/">
-            <Meals />
-          </Route>
-          <Route path="/myorders">
-            <MyOrders />
-          </Route>
-          <Route path="/mycart">
-            <MyCart />
-          </Route>
-          <Route path="/mywishlist">
-            <WishList />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Meals />
+            </Route>
+            <Route path="/myorders">
+              <MyOrders />
+            </Route>
+            <Route path="/mycart">
+              <MyCart />
+            </Route>
+            <Route path="/mywishlist">
+              <WishList />
+            </Route>
+          </Switch>
         </main>
       )}
     </CartProvider>

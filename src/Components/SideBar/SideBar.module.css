@@ -42,7 +42,8 @@
   color: black;
 }
 
-.sidebarItem:hover {
+.sidebarItem:hover,
+.sidebarItem.active {
   cursor: pointer;
   background-color: rgb(185, 185, 185);
 }
