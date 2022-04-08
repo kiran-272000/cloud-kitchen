@@ -16,7 +16,10 @@
 .cart-image {
   display: flex;
   justify-content: center;
-  height: 300px;
+  align-items: center;
+}
+.cart-image img {
+  width: 400px;
 }
 
 .total {
@@ -77,6 +80,9 @@
 @media only screen and (max-width: 500px) {
   .cart-image {
     height: 180px;
+  }
+  .cart-image img {
+    width: 300px;
   }
   .cartEmpty-msg {
     font-size: 10.5pt;
